@@ -1,217 +1,229 @@
-<p align="center">
-  <a href="https://librechat.ai">
-    <img src="client/public/assets/logo.svg" height="256">
-  </a>
-  <h1 align="center">
-    <a href="https://librechat.ai">LibreChat</a>
-  </h1>
-</p>
+# LibreChat AI Консультант по АУСН
 
-<p align="center">
-  <a href="https://discord.librechat.ai"> 
-    <img
-      src="https://img.shields.io/discord/1086345563026489514?label=&logo=discord&style=for-the-badge&logoWidth=20&logoColor=white&labelColor=000000&color=blueviolet">
-  </a>
-  <a href="https://www.youtube.com/@LibreChat"> 
-    <img
-      src="https://img.shields.io/badge/YOUTUBE-red.svg?style=for-the-badge&logo=youtube&logoColor=white&labelColor=000000&logoWidth=20">
-  </a>
-  <a href="https://docs.librechat.ai"> 
-    <img
-      src="https://img.shields.io/badge/DOCS-blue.svg?style=for-the-badge&logo=read-the-docs&logoColor=white&labelColor=000000&logoWidth=20">
-  </a>
-  <a aria-label="Sponsors" href="https://github.com/sponsors/danny-avila">
-    <img
-      src="https://img.shields.io/badge/SPONSORS-brightgreen.svg?style=for-the-badge&logo=github-sponsors&logoColor=white&labelColor=000000&logoWidth=20">
-  </a>
-</p>
+Этот проект — кастомизированный AI-консультант, построенный на базе [LibreChat](https://github.com/danny-avila/LibreChat), предназначенный для помощи пользователям по вопросам автоматизированной упрощённой системы налогообложения (АУСН) в России.
 
-<p align="center">
-<a href="https://railway.app/template/b5k2mn?referralCode=HI9hWz">
-  <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="30">
-</a>
-<a href="https://zeabur.com/templates/0X2ZY8">
-  <img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30"/>
-</a>
-<a href="https://template.cloud.sealos.io/deploy?templateName=librechat">
-  <img src="https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg" alt="Deploy on Sealos" height="30">
-</a>
-</p>
+## Оглавление
 
-<p align="center">
-  <a href="https://www.librechat.ai/docs/translation">
-    <img 
-      src="https://img.shields.io/badge/dynamic/json.svg?style=for-the-badge&color=2096F3&label=locize&query=%24.translatedPercentage&url=https://api.locize.app/badgedata/4cb2598b-ed4d-469c-9b04-2ed531a8cb45&suffix=%+translated" 
-      alt="Translation Progress">
-  </a>
-</p>
+- [Описание проекта](#описание-проекта)
+- [Функциональные возможности](#функциональные-возможности)
+- [Технологический стек](#технологический-стек)
+- [Требования к системе](#требования-к-системе)
+- [Установка и запуск](#установка-и-запуск)
+- [Настройка](#настройка)
+- [Использование](#использование)
+- [Обновление базы знаний](#обновление-базы-знаний)
+- [Тестирование](#тестирование)
+- [Поддержка и обратная связь](#поддержка-и-обратная-связь)
 
+## Описание проекта
 
-# ✨ Features
+AI Консультант по АУСН — это специализированный чат-бот, разработанный для автоматизации консультационных услуг в сфере налогообложения. Проект позволяет пользователям получать точные и актуальные ответы на вопросы, связанные с упрощенной системой налогообложения, без необходимости обращаться к специалистам.
 
-- 🖥️ **UI & Experience** inspired by ChatGPT with enhanced design and features
+Проект совмещает в себе:
 
-- 🤖 **AI Model Selection**:  
-  - Anthropic (Claude), AWS Bedrock, OpenAI, Azure OpenAI, Google, Vertex AI, OpenAI Responses API (incl. Azure)
-  - [Custom Endpoints](https://www.librechat.ai/docs/quick_start/custom_endpoints): Use any OpenAI-compatible API with LibreChat, no proxy required
-  - Compatible with [Local & Remote AI Providers](https://www.librechat.ai/docs/configuration/librechat_yaml/ai_endpoints):
-    - Ollama, groq, Cohere, Mistral AI, Apple MLX, koboldcpp, together.ai,
-    - OpenRouter, Perplexity, ShuttleAI, Deepseek, Qwen, and more
+- Современный веб-интерфейс, похожий на ChatGPT, удобный для пользователей.
+- Мощный механизм Retrieval-Augmented Generation (RAG), который ищет релевантную информацию в базе документов и комбинирует её с генеративной моделью для точных осмысленных ответов.
+- Использование векторной базы данных (MongoDB с эмбеддингами) для быстрого и эффективного поиска по базе знаний.
+- Возможность расширения и адаптации под любые темы и бизнес-задачи.
+- Быстрое развёртывание с помощью Docker и возможность локального и облачного хостинга.
+- Интеграция с разными AI-моделями, включая OpenAI, и поддержка open source LLM.
 
-- 🔧 **[Code Interpreter API](https://www.librechat.ai/docs/features/code_interpreter)**: 
-  - Secure, Sandboxed Execution in Python, Node.js (JS/TS), Go, C/C++, Java, PHP, Rust, and Fortran
-  - Seamless File Handling: Upload, process, and download files directly
-  - No Privacy Concerns: Fully isolated and secure execution
+Цель проекта — предоставить простой, надежный и отзывчивый AI-ассистент, способный автоматически консультировать пользователей по налоговой тематике, снижая нагрузку на поддержку и повышая качество сервиса.
 
-- 🔦 **Agents & Tools Integration**:  
-  - **[LibreChat Agents](https://www.librechat.ai/docs/features/agents)**:
-    - No-Code Custom Assistants: Build specialized, AI-driven helpers
-    - Agent Marketplace: Discover and deploy community-built agents
-    - Collaborative Sharing: Share agents with specific users and groups
-    - Flexible & Extensible: Use MCP Servers, tools, file search, code execution, and more
-    - Compatible with Custom Endpoints, OpenAI, Azure, Anthropic, AWS Bedrock, Google, Vertex AI, Responses API, and more
-    - [Model Context Protocol (MCP) Support](https://modelcontextprotocol.io/clients#librechat) for Tools
+## Функциональные возможности
 
-- 🔍 **Web Search**:  
-  - Search the internet and retrieve relevant information to enhance your AI context
-  - Combines search providers, content scrapers, and result rerankers for optimal results
-  - **Customizable Jina Reranking**: Configure custom Jina API URLs for reranking services
-  - **[Learn More →](https://www.librechat.ai/docs/features/web_search)**
+- **Консультации по АУСН**: Ответы на вопросы по упрощенной системе налогообложения
+- **Поиск по документам**: Быстрый поиск информации в базе знаний по АУСН
+- **Многоязычная поддержка**: Поддержка русского и английского языков
+- **Интерфейс пользователя**: Современный интерфейс с поддержкой темной и светлой тем
+- **Административная панель**: Управление базой знаний и настройками консультанта
+- **API-интеграции**: Возможность интеграции с внешними системами
 
-- 🪄 **Generative UI with Code Artifacts**:  
-  - [Code Artifacts](https://youtu.be/GfTj7O4gmd0?si=WJbdnemZpJzBrJo3) allow creation of React, HTML, and Mermaid diagrams directly in chat
+## Технологический стек
 
-- 🎨 **Image Generation & Editing**
-  - Text-to-image and image-to-image with [GPT-Image-1](https://www.librechat.ai/docs/features/image_gen#1--openai-image-tools-recommended)
-  - Text-to-image with [DALL-E (3/2)](https://www.librechat.ai/docs/features/image_gen#2--dalle-legacy), [Stable Diffusion](https://www.librechat.ai/docs/features/image_gen#3--stable-diffusion-local), [Flux](https://www.librechat.ai/docs/features/image_gen#4--flux), or any [MCP server](https://www.librechat.ai/docs/features/image_gen#5--model-context-protocol-mcp)
-  - Produce stunning visuals from prompts or refine existing images with a single instruction
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express
+- **База данных**: MongoDB
+- **Поиск**: Meilisearch
+- **Векторная база данных**: pgvector
+- **Контейнеризация**: Docker, Docker Compose
+- **AI-модели**: OpenAI, и другие через стандартные API
+- **RAG-система**: Собственная реализация на базе OpenAI embeddings
 
-- 💾 **Presets & Context Management**:  
-  - Create, Save, & Share Custom Presets  
-  - Switch between AI Endpoints and Presets mid-chat
-  - Edit, Resubmit, and Continue Messages with Conversation branching  
-  - Create and share prompts with specific users and groups
-  - [Fork Messages & Conversations](https://www.librechat.ai/docs/features/fork) for Advanced Context control
+## Требования к системе
 
-- 💬 **Multimodal & File Interactions**:  
-  - Upload and analyze images with Claude 3, GPT-4.5, GPT-4o, o1, Llama-Vision, and Gemini 📸  
-  - Chat with Files using Custom Endpoints, OpenAI, Azure, Anthropic, AWS Bedrock, & Google 🗃️
+- **Операционная система**: Windows 10/11, macOS, Linux
+- **Docker**: Версия 20.10.0 или выше
+- **Docker Compose**: Версия 2.5.0 или выше
+- **Память**: Минимум 8 ГБ RAM (рекомендуется 16 ГБ)
+- **Место на диске**: Минимум 10 ГБ свободного места
 
-- 🌎 **Multilingual UI**:
-  - English, 中文 (简体), 中文 (繁體), العربية, Deutsch, Español, Français, Italiano
-  - Polski, Português (PT), Português (BR), Русский, 日本語, Svenska, 한국어, Tiếng Việt
-  - Türkçe, Nederlands, עברית, Català, Čeština, Dansk, Eesti, فارسی
-  - Suomi, Magyar, Հայերեն, Bahasa Indonesia, ქართული, Latviešu, ไทย, ئۇيغۇرچە
+## Установка и запуск
 
-- 🧠 **Reasoning UI**:  
-  - Dynamic Reasoning UI for Chain-of-Thought/Reasoning AI models like DeepSeek-R1
+### Быстрый запуск
 
-- 🎨 **Customizable Interface**:  
-  - Customizable Dropdown & Interface that adapts to both power users and newcomers
+Для быстрого запуска проекта выполните следующие команды:
 
-- 🗣️ **Speech & Audio**:  
-  - Chat hands-free with Speech-to-Text and Text-to-Speech  
-  - Automatically send and play Audio  
-  - Supports OpenAI, Azure OpenAI, and Elevenlabs
+```bash
+# Клонирование репозитория
+git clone https://github.com/danny-avila/LibreChat.git
+cd LibreChat
 
-- 📥 **Import & Export Conversations**:  
-  - Import Conversations from LibreChat, ChatGPT, Chatbot UI  
-  - Export conversations as screenshots, markdown, text, json
+# Создание файла конфигурации
+cp .env.example .env
 
-- 🔍 **Search & Discovery**:  
-  - Search all messages/conversations
+# Запуск всех сервисов
+node scripts/start_services.js
+```
 
-- 👥 **Multi-User & Secure Access**:
-  - Multi-User, Secure Authentication with OAuth2, LDAP, & Email Login Support
-  - Built-in Moderation, and Token spend tools
+### Пошаговая установка
 
-- ⚙️ **Configuration & Deployment**:  
-  - Configure Proxy, Reverse Proxy, Docker, & many Deployment options  
-  - Use completely local or deploy on the cloud
+1. **Клонируйте репозиторий**:
+   ```bash
+   git clone https://github.com/danny-avila/LibreChat.git
+   cd LibreChat
+   ```
 
-- 📖 **Open-Source & Community**:  
-  - Completely Open-Source & Built in Public  
-  - Community-driven development, support, and feedback
+2. **Настройте переменные окружения**:
+   Создайте файл `.env` на основе `.env.example` и настройте необходимые параметры:
+   ```bash
+   cp .env.example .env
+   ```
 
-[For a thorough review of our features, see our docs here](https://docs.librechat.ai/) 📚
+3. **Запустите сервисы**:
+   ```bash
+   # Запуск всех сервисов
+   node scripts/start_services.js
+   
+   # Остановка всех сервисов
+   node scripts/start_services.js stop
+   ```
 
-## 🪶 All-In-One AI Conversations with LibreChat
+4. **Откройте в браузере**:
+   Перейдите по адресу [http://localhost:3080](http://localhost:3080)
 
-LibreChat brings together the future of assistant AIs with the revolutionary technology of OpenAI's ChatGPT. Celebrating the original styling, LibreChat gives you the ability to integrate multiple AI models. It also integrates and enhances original client features such as conversation and message search, prompt templates and plugins.
+## Настройка
 
-With LibreChat, you no longer need to opt for ChatGPT Plus and can instead use free or pay-per-call APIs. We welcome contributions, cloning, and forking to enhance the capabilities of this advanced chatbot platform.
+### Основные параметры в .env
 
-[![Watch the video](https://raw.githubusercontent.com/LibreChat-AI/librechat.ai/main/public/images/changelog/v0.7.6.gif)](https://www.youtube.com/watch?v=ilfwGQtJNlI)
+```env
+# Server Configuration
+HOST=0.0.0.0
+PORT=3080
 
-Click on the thumbnail to open the video☝️
+# Database Configuration
+MONGO_URI=mongodb://mongodb:27017/LibreChat
 
----
+# RAG Configuration
+RAG_OPENAI_API_KEY=your_openai_api_key
+EMBEDDINGS_PROVIDER=openai
+EMBEDDINGS_MODEL=text-embedding-3-small
 
-## 🌐 Resources
+# OpenAI Configuration
+OPENAI_API_KEY=your_openai_api_key
 
-**GitHub Repo:**
-  - **RAG API:** [github.com/danny-avila/rag_api](https://github.com/danny-avila/rag_api)
-  - **Website:** [github.com/LibreChat-AI/librechat.ai](https://github.com/LibreChat-AI/librechat.ai)
+# UI Configuration
+APP_TITLE=LibreChat AI Консультант по АУСН
+```
 
-**Other:**
-  - **Website:** [librechat.ai](https://librechat.ai)
-  - **Documentation:** [librechat.ai/docs](https://librechat.ai/docs)
-  - **Blog:** [librechat.ai/blog](https://librechat.ai/blog)
+### Конфигурация AI-моделей
 
----
+Файл `librechat.yaml` содержит расширенную конфигурацию AI-моделей:
 
-## 📝 Changelog
+```yaml
+# Configuration version (required)
+version: 1.2.1
 
-Keep up with the latest updates by visiting the releases page and notes:
-- [Releases](https://github.com/danny-avila/LibreChat/releases)
-- [Changelog](https://www.librechat.ai/changelog) 
+# Cache settings: Set to true to enable caching
+cache: true
 
-**⚠️ Please consult the [changelog](https://www.librechat.ai/changelog) for breaking changes before updating.**
+# Custom interface configuration
+interface:
+  customWelcome: 'Добро пожаловать в AI Консультант по АУСН! Готов помочь с вопросами упрощённой системы налогообложения.'
 
----
+# AI endpoints configuration
+endpoints:
+  openAI:
+    enabled: true
+    defaultModel: gpt-4-turbo
+    retrievalModels: 
+      - gpt-4-turbo
+      - gpt-4o
+    
+    # Capabilities available for tax consultation agents
+    capabilities: 
+      - retrieval
+      - tools
+      - image_vision
 
-## ⭐ Star History
+  # RAG Configuration for tax knowledge base
+  rag:
+    apiKey: '${RAG_OPENAI_API_KEY}'
+    baseURL: '${RAG_API_URL}'
+    
+    # Models for generating embeddings of tax documents
+    models:
+      default:
+        - text-embedding-3-small
+        - text-embedding-3-large
+      fetch: false
+    
+    # Enable full context usage when retrieving tax information
+    useFullContext: true
+    # Provider for embeddings
+    embeddingsProvider: openai
+    
+    # Model for embeddings
+    embeddingsModel: text-embedding-3-small
+```
 
-<p align="center">
-  <a href="https://star-history.com/#danny-avila/LibreChat&Date">
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=danny-avila/LibreChat&type=Date&theme=dark" onerror="this.src='https://api.star-history.com/svg?repos=danny-avila/LibreChat&type=Date'" />
-  </a>
-</p>
-<p align="center">
-  <a href="https://trendshift.io/repositories/4685" target="_blank" style="padding: 10px;">
-    <img src="https://trendshift.io/api/badge/repositories/4685" alt="danny-avila%2FLibreChat | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
-  </a>
-  <a href="https://runacap.com/ross-index/q1-24/" target="_blank" rel="noopener" style="margin-left: 20px;">
-    <img style="width: 260px; height: 56px" src="https://runacap.com/wp-content/uploads/2024/04/ROSS_badge_white_Q1_2024.svg" alt="ROSS Index - Fastest Growing Open-Source Startups in Q1 2024 | Runa Capital" width="260" height="56"/>
-  </a>
-</p>
+## Использование
 
----
+После запуска консультанта, вы можете задавать ему вопросы по АУСН. Например:
 
-## ✨ Contributions
+- "Какие налоговые ставки при АУСН?"
+- "Какие документы нужны для перехода на АУСН?"
+- "Каковы сроки сдачи отчетности при АУСН?"
+- "Какие льготы предусмотрены для малых предприятий при АУСН?"
 
-Contributions, suggestions, bug reports and fixes are welcome!
+Консультант будет искать информацию в базе знаний и предоставлять точные ответы на основе актуальных документов.
 
-For new features, components, or extensions, please open an issue and discuss before sending a PR.
+## Обновление базы знаний
 
-If you'd like to help translate LibreChat into your language, we'd love your contribution! Improving our translations not only makes LibreChat more accessible to users around the world but also enhances the overall user experience. Please check out our [Translation Guide](https://www.librechat.ai/docs/translation).
+Для добавления новых документов по АУСН:
 
----
+1. Поместите файлы в директорию `knowledge/`
+2. Запустите индексацию:
+   ```bash
+   node scripts/index_ausn_docs.js
+   ```
 
-## 💖 This project exists in its current state thanks to all the people who contribute
+Поддерживаемые форматы: Markdown (.md), PDF, DOCX, TXT.
 
-<a href="https://github.com/danny-avila/LibreChat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=danny-avila/LibreChat" />
-</a>
+## Тестирование
 
----
+Для тестирования работы консультанта:
 
-## 🎉 Special Thanks
+1. Запустите все сервисы:
+   ```bash
+   node scripts/start_services.js
+   ```
 
-We thank [Locize](https://locize.com) for their translation management tools that support multiple languages in LibreChat.
+2. Перейдите в веб-интерфейс: [http://localhost:3080](http://localhost:3080)
 
-<p align="center">
-  <a href="https://locize.com" target="_blank" rel="noopener noreferrer">
-    <img src="https://github.com/user-attachments/assets/d6b70894-6064-475e-bb65-92a9e23e0077" alt="Locize Logo" height="50">
-  </a>
-</p>
+3. Задайте тестовые вопросы:
+   - "Расскажи о преимуществах АУСН"
+   - "Какие налоговые ставки при АУСН для малых предприятий?"
+   - "Какие сроки сдачи отчетности при АУСН?"
+
+4. Проверьте, что ответы точные и основаны на документах из базы знаний.
+
+## Поддержка и обратная связь
+
+Для вопросов и обратной связи:
+
+- Создайте issue в репозитории GitHub
+- Напишите на электронную почту: support@librechat-ausn.ru
+- Обратитесь в чат поддержки на сайте
+
+Лицензия: MIT

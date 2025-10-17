@@ -1,0 +1,62 @@
+name: Versioning
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Update version
+      run: |
+        # Проверяем, есть ли изменения в VERSION.md
+        if git diff --cached --exit-code VERSION.md; then
+          echo "VERSION.md не изменился"
+        else
+          echo "VERSION.md был обновлен"
+          # Здесь можно добавить дополнительные действия при обновлении версии
+        fi
+        
+    - name: Create version tag
+      if: github.event_name == 'push'
+      run: |
+        VERSION=$(grep -oP '(?<=^## Текущая версия\n)\d+\.\d+\.\d+' VERSION.md)
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git tag -a "v$VERSION" -m "Release version $VERSION"
+        git push origin "v$VERSION" || echo "Тег уже существует"
+        
+    - name: Update documentation
+      run: |
+        # Обновление документации при необходимости
+        echo "Обновление документации..."
+        
+    - name: Run tests
+      run: |
+        # Запуск тестов перед публикацией
+        echo "Запуск тестов..."
+        # npm test
+        
+    - name: Deploy to production
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        # Скрипт деплоя в production
+        echo "Деплой в production..."

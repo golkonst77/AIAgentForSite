@@ -1,0 +1,148 @@
+# Configuration version (required)
+version: 1.2.1
+
+# Cache settings: Set to true to enable caching
+cache: true
+
+# Custom interface configuration
+interface:
+  customWelcome: 'Добро пожаловать в AI Консультант по АУСН! Готов помочь с вопросами упрощённой системы налогообложения.'
+  fileSearch: true
+  # Privacy policy settings
+  privacyPolicy:
+    externalUrl: 'https://librechat.ai/privacy-policy'
+    openNewTab: true
+
+  # Terms of service
+  termsOfService:
+    externalUrl: 'https://librechat.ai/tos'
+    openNewTab: true
+    modalAcceptance: true
+    modalTitle: 'Условия использования AI Консультанта по АУСН'
+    modalContent: |
+      # Условия использования AI Консультанта по АУСН
+
+      *Дата вступления в силу: 17 октября 2025 года*
+
+      Добро пожаловать в AI Консультант по АУСН, консультационный сервис по вопросам автоматизированной упрощённой системы налогообложения. Эти Условия использования ("Условия") регулируют ваше использование нашего сервиса. Используя сервис, вы соглашаетесь с этими Условиями.
+
+      ## 1. Предназначение сервиса
+      Сервис предназначен для предоставления консультационной информации по вопросам АУСН в России. Предоставленная информация носит рекомендательный характер и не заменяет профессиональную юридическую или бухгалтерскую консультацию.
+
+      ## 2. Использование сервиса
+      Вы можете использовать сервис для получения информации по вопросам АУСН. Запрещается использовать сервис для:
+      - Предоставления профессиональных юридических или бухгалтерских услуг
+      - Создания вредоносного контента
+      - Попыток обмана системы или получения несанкционированного доступа
+
+      ## 3. Ограничение ответственности
+      Мы не несем ответственности за любые убытки или ущерб, возникшие в результате использования информации, полученной через данный сервис. Рекомендуем проконсультироваться с профессиональным специалистом по всем важным вопросам.
+
+      ## 4. Изменение условий
+      Мы оставляем за собой право вносить изменения в эти Условия. Продолжение использования сервиса после внесения изменений означает ваше согласие с обновленными Условиями.
+
+  endpointsMenu: true
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: true
+  peoplePicker:
+    users: true
+    groups: true
+    roles: true
+  marketplace:
+      use: false
+  fileCitations: true
+
+# Definition of custom endpoints
+endpoints:
+  # OpenAI Configuration for АУСН Consultant
+  openAI:
+    # Use the user-provided OpenAI API key
+    apiKey: '${OPENAI_API_KEY}'
+    # Base URL for OpenAI API
+    baseURL: 'https://api.openai.com/v1'
+    
+    # Models configuration for tax consultation
+    models:
+      # Default models for tax consultation
+      default:
+        - 'gpt-4o'
+        - 'gpt-4o-mini'
+        - 'gpt-4-turbo'
+      # Do not fetch models from API, use predefined list
+      fetch: false
+
+    # Enable conversation titling
+    titleConvo: true
+    # Model to use for generating conversation titles
+    titleModel: 'gpt-4o-mini'
+    
+    # Enable summarization of long conversations
+    summarize: true
+    # Model to use for summarization
+    summaryModel: 'gpt-4o-mini'
+    
+    # Custom label for the model in the UI
+    modelDisplayLabel: 'AI Консультант по АУСН'
+    
+    # Add specific parameters for tax consultation
+    addParams:
+      # Adjust temperature for more consistent tax advice
+      temperature: 0.3
+      # Limit tokens to focus on essential information
+      max_tokens: 2048
+      # Include tax-specific instructions
+      instructions: |
+        Вы - эксперт по автоматизированной упрощённой системе налогообложения (АУСН) в России. 
+        Предоставляйте точные, краткие и практичные консультации по вопросам АУСН. 
+        Основывайте свои ответы на актуальных законодательных актах и официальных разъяснениях.
+        Если вопрос выходит за рамки вашей компетенции, честно сообщите об этом.
+        Предоставляйте информацию в структурированном виде с четкими выводами.
+
+  # Assistants API Configuration
+  assistants:
+    # Use the user-provided Assistants API key
+    apiKey: '${ASSISTANTS_API_KEY}'
+    baseURL: 'https://api.openai.com/v1'
+    
+    # Polling interval for checking assistant updates
+    pollIntervalMs: 3000
+    # Timeout for assistant operations
+    timeoutMs: 180000
+    # Models that support retrieval for tax documents
+    retrievalModels: 
+      - 'gpt-4-turbo'
+      - 'gpt-4o'
+    
+    # Capabilities available for tax consultation agents
+    capabilities: 
+      - 'retrieval'  # Document retrieval for tax laws
+      - 'tools'      # External tools if needed
+      - 'image_vision' # For analyzing tax forms if needed
+
+  # RAG Configuration for tax knowledge base
+  rag:
+    # Use the same API key as for OpenAI
+    apiKey: '${RAG_OPENAI_API_KEY}'
+    # Base URL for RAG API
+    baseURL: '${RAG_API_URL}'
+    
+    # Models for generating embeddings of tax documents
+    models:
+      default:
+        - 'text-embedding-3-small'
+        - 'text-embedding-3-large'
+      fetch: false
+    
+    # Enable full context usage when retrieving tax information
+    useFullContext: true
+    # Provider for embeddings
+    embeddingsProvider: 'openai'
+    
+    # Model for embeddings
+    embeddingsModel: 'text-embedding-3-small'
